@@ -12,6 +12,7 @@ public class GameFrame extends JFrame {
     private String lastLetter;
     private int oWins = 0, xWins = 0;
     private int ans;
+    private int moves = 0;
     
     public GameFrame() {
         setProperties();
@@ -39,6 +40,7 @@ public class GameFrame extends JFrame {
                             if(!buttons[finalI][finalJ].getText().equals("O")) {
                                 buttons[finalI][finalJ].setText("X");
                                 lastLetter = "X";
+                                moves++;
                                 isXTurn = false;
                             }
                             if(shouldEndGame()) {
@@ -63,11 +65,31 @@ public class GameFrame extends JFrame {
                                         }
                                     }
                                 }
+                            } else if(moves == 9) {
+                                JOptionPane.showMessageDialog(null,"DRAW");
+                                ans = JOptionPane.showConfirmDialog(null,"O has won " + oWins + " and X " + xWins + ". Would you like to continue","Continue",JOptionPane.YES_NO_OPTION);
+                                if(ans == JOptionPane.YES_OPTION)
+                                    resetButtons();
+                                else {
+                                    if(xWins > oWins) {
+                                        JOptionPane.showMessageDialog(null,"X won the whole game.");
+                                        disableButtons();
+                                    }
+                                    else if(oWins > xWins) {
+                                        JOptionPane.showMessageDialog(null,"O won the whole game.");
+                                        disableButtons();
+                                    }
+                                    else {
+                                        JOptionPane.showMessageDialog(null,"Draw");
+                                        disableButtons();
+                                    }
+                                }
                             }
                         } else {
                             if(!buttons[finalI][finalJ].getText().equals("X")) {
                                 buttons[finalI][finalJ].setText("O");
                                 lastLetter = "O";
+                                moves++;
                                 isXTurn = true;
                             }
                             if(shouldEndGame()) {
