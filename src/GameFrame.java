@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
-    private JPanel panel;
+    private JPanel panel; 
     private JLabel result;
     private JButton[][] buttons = new JButton[3][3];
     private boolean isXTurn = true;
